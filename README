@@ -1,0 +1,99 @@
+
+==== NAME ====
+
+Posy::Plugin::FlavourMenu - Posy plugin to make a menu of flavours
+
+
+==== VERSION ====
+
+This describes version ``0.40'' of Posy::Plugin::FlavourMenu.
+
+
+==== DESCRIPTION ====
+
+This plugin creates a menu to let users choose a particular "flavour" of
+page layout.
+
+There is one variable filled in by this plugin that can be used within your
+flavour files. The $flow_flavour_menu variable contains the list of links of
+the different flavours available on your site.
+
+
+==   Activation   ==
+
+This plugin needs to be added to both the plugins list and the actions list.
+It doesn't really matter where it is in the plugins list, just so long as
+you also have the Posy::Plugin::YamlConfig plugin as well.
+
+In the actions list, it needs to go somewhere after ``head_template'' and
+before ``head_render'', since the config needs to have been read, and this
+needs to set values before the head is rendered.
+
+
+==   Configuration   ==
+
+This expects configuration settings in the $self->{config} hash, which, in
+the default Posy setup, can be defined in the main "config" file in the data
+directory.
+
+This requires the Posy::Plugin::YamlConfig plugin (or equivalent), because
+the configuration variables for this plugin are not simple string values; it
+expects the config values to be in a hash at $self->{config}->{flavour_menu}
+
+``flavour_menu''
+A hash containing the settings.
+
+``flavours''
+The list of flavours you want to offer in your menu, in the order that you
+want them to be shown.
+
+Note that for every entry in this list, there must be a corresponding entry
+in the names hash.
+
+``names''
+The labels to give the flavours in the menu list.
+
+Example config file:
+
+        ---
+        flavour_menu:
+          flavours:
+            - html
+            - top
+            - side
+            - rss
+          names:
+            html: Default
+            top: Top
+            side: Sidebar
+            rss: 'Rss Feed'
+
+
+==== REQUIRES ====
+
+    Posy
+    Posy::Core
+    Posy::Plugin::YamlConfig
+
+    Test::More
+
+
+==== AUTHOR ====
+
+    Kathryn Andersen (RUBYKAT)
+    perlkat AT katspace dot com
+    http://www.katspace.com
+
+
+==== COPYRIGHT AND LICENCE ====
+
+Copyright (c) 2004-2005 by Kathryn Andersen
+
+Based in part on the 'css' blosxom plugin by Eric Davis <edavis <at>
+foobargeek <dot> com> http://www.foobargeek.com And in part on the
+'flavourmenu' blosxom plugin by Tim Lambert (lambert <at> cse <dot> unsw
+<dot> edu <dot> au)
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
